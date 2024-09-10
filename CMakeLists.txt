@@ -3,4 +3,21 @@ project(StealthHunter C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(StealthHunter main.c)
+find_package(CURL REQUIRED)
+
+add_executable(StealthHunter main.c
+        utils.h
+        check_xss.c
+        check_xss.h
+        check_sql_injection.c
+        check_sql_injection.h
+        check_nosql_injection.c
+        check_nosql_injection.h
+        test.c
+        test.h
+        utils.c
+)
+
+
+include_directories(${CURL_INCLUDE_DIRS})
+target_link_libraries(StealthHunter ${CURL_LIBRARIES})
