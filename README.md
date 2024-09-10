@@ -8,5 +8,5 @@ StealthHunter est un logiciel de recherche d'injections SQL, NoSQL, et XSS pour 
 - **Détection d'injection NoSQL** : Recherche les failles d'injection dans les bases de données NoSQL.
 - **Détection XSS** : Détecte les vulnérabilités de type Cross-Site Scripting (XSS) qui pourraient compromettre la sécurité des utilisateurs.
 
-### Logiciels Requis
+### Requis
 - **Curl** : https://curl.se/download.html
