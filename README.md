@@ -15,10 +15,22 @@ StealthHunter est un logiciel de recherche d'injections SQL, NoSQL, et XSS pour 
 ```bash
 sudo apt update
 sudo apt install curl
+sudo apt install cmake 
 ```
 
-#### Arch Linux (APT)
+#### Arch Linux (Pacman)
 ```bash
 sudo pacman -Syu
 sudo pacman -S curl
+sudo pacman -S cmake
+```
+
+### Build
+```bash
+git clone https://github.com/GabziDev/StealthHunter.git
+cd StealthHunter
+mkdir build
+cd build
+cmake ..
+make
 ```
