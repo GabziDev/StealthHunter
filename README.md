@@ -35,7 +35,7 @@ cmake ..
 make
 ```
 
-(WINDOWS)
+(Windows)
 ```bash
 git clone https://github.com/GabziDev/StealthHunter.git
 cd StealthHunter
