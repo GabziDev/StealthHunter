@@ -41,7 +41,7 @@ git clone https://github.com/GabziDev/StealthHunter.git
 cd StealthHunter
 mkdir build
 cd build
-cmake -DCURL_INCLUDE_DIR="C:\Users\gabzdev\Desktop\curl\include" -DCURL_LIBRARY="C:\Users\gabzdev\Desktop\curl\build\lib\libcurl.dll.a" ..
+cmake -DCURL_INCLUDE_DIR="C:\path\to\curl\include" -DCURL_LIBRARY="C:\path\to\curl\build\lib\libcurl.dll.a" ..
 cmake --build . --config Release
 ```
 
