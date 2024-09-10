@@ -34,7 +34,7 @@ void menu() {
         clear_console();
 
         logo();
-        printf("%s Welcome to the StealthHunter (S-H/%s)\n%s [%s]\n", INFO, VERSION_SH, OK, curl_version());
+        printf("%s Welcome to the StealthHunter Menu ! [D/Gabzdev] (S-H/%s)\n%s [%s]\n", INFO, VERSION_SH, OK, curl_version());
         printf("1: XSS\n");
         printf("2: Injection NoSQL\n");
         printf("3: Injection SQL\n");
