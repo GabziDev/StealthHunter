@@ -10,3 +10,15 @@ StealthHunter est un logiciel de recherche d'injections SQL, NoSQL, et XSS pour 
 
 ### Requis
 - **Curl** : https://curl.se/download.html
+
+#### Debian/Ubuntu (APT)
+```bash
+sudo apt update
+sudo apt install curl
+```
+
+#### Arch Linux (APT)
+```bash
+sudo pacman -Syu
+sudo pacman -S curl
+```
