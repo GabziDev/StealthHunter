@@ -6,6 +6,7 @@
 #include "check_nosql_injection.h"
 #include "check_sql_injection.h"
 #include "check_xss.h"
+#include "dirbusting.h"
 #include "utils.h"
 
 void menu() {
@@ -18,9 +19,10 @@ void menu() {
 
         print_logo();
         printf("%s Welcome to the StealthHunter Menu ! [D/Gabzdev] (S-H/%s)\n%s [%s]\n", INFO, VERSION_SH, OK, curl_version());
-        printf("1: XSS\n");
-        printf("2: Injection NoSQL\n");
-        printf("3: Injection SQL\n");
+        printf("1: XSS %s(Not Available)%s\n", RED, RESET);
+        printf("2: Injection NoSQL %s(Not Available)%s\n", RED, RESET);
+        printf("3: Injection SQL %s(Not Available)%s\n", RED, RESET);
+        printf("4: Dir Busting\n");
         printf("%sq%s: quit\n", RED, RESET);
         printf("-> ");
 
@@ -35,10 +37,10 @@ void menu() {
                 check_xss();
             } else if (strcmp(inputUser, "2") == 0) {
                 check_nosql_injection();
-                getchar();
             } else if (strcmp(inputUser, "3") == 0) {
                 check_sql_injection();
-                getchar();
+            } else if (strcmp(inputUser, "4") == 0) {
+                dirbusting_main();
             } else {
                 clear_console();
             }

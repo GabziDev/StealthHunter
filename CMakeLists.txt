@@ -14,6 +14,8 @@ add_executable(StealthHunter main.c
         check_nosql_injection.c
         check_nosql_injection.h
         utils.c
+        dirbusting.c
+        dirbusting.h
 )
 
 
