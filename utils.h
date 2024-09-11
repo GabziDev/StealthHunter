@@ -17,5 +17,6 @@ extern const char* INFO;
 extern const char* OK;
 
 void clear_console();
+void print_logo();
 
 #endif //UTILS_H
