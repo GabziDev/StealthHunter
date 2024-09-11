@@ -6,7 +6,6 @@
 #include "check_nosql_injection.h"
 #include "check_sql_injection.h"
 #include "check_xss.h"
-#include "test.h"
 #include "utils.h"
 
 void logo() {
@@ -56,9 +55,6 @@ void menu() {
                 getchar();
             } else if (strcmp(inputUser, "3") == 0) {
                 check_sql_injection();
-                getchar();
-            } else if (strcmp(inputUser, "t") == 0) {
-                test_req();
                 getchar();
             } else {
                 clear_console();

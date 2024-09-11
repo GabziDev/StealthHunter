@@ -13,8 +13,6 @@ add_executable(StealthHunter main.c
         check_sql_injection.h
         check_nosql_injection.c
         check_nosql_injection.h
-        test.c
-        test.h
         utils.c
 )
 
