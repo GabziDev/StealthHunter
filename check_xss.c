@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void xss_get_post() {
+void xss_get() {
 }
 
 void xss_header() {
@@ -14,6 +14,7 @@ void xss_header() {
 
 void xss_cookies() {
 }
+
 void xss_local_storage() {
 }
 
@@ -29,7 +30,7 @@ void check_xss_menu() {
 
         print_logo();
         printf("=> %s Check Cross-site scripting%s\n", YELLOW, RESET);
-        printf("1: GET et POST\n");
+        printf("1: GET\n");
         printf("2: Header\n");
         printf("3: Cookies\n");
         printf("4: Local Storage\n");
@@ -45,7 +46,7 @@ void check_xss_menu() {
             if (strcmp(inputUser, "q") == 0) {
                 menuIsActive = false;
             } else if (strcmp(inputUser, "1") == 0) {
-                xss_get_post();
+                xss_get();
             } else if (strcmp(inputUser, "2") == 0) {
                 xss_header();
             } else if (strcmp(inputUser, "3") == 0) {
