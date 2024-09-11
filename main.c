@@ -21,7 +21,7 @@ void menu() {
         printf("1: XSS\n");
         printf("2: Injection NoSQL\n");
         printf("3: Injection SQL\n");
-        printf("q: Quit\n");
+        printf("%sq%s: quit\n", RED, RESET);
         printf("-> ");
 
         if (fgets(inputUser, sizeof(inputUser), stdin) != NULL) {
