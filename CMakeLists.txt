@@ -18,6 +18,7 @@ add_executable(StealthHunter main.c
         dirbusting.h
 )
 
+install(TARGETS StealthHunter DESTINATION /usr/local/bin)
 
 include_directories(${CURL_INCLUDE_DIRS})
 target_link_libraries(StealthHunter ${CURL_LIBRARIES})
