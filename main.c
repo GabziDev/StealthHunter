@@ -8,6 +8,7 @@
 #include "check_xss.h"
 #include "dirbusting.h"
 #include "utils.h"
+#include "version.h"
 
 void menu() {
     char *curl_version();
@@ -50,8 +51,18 @@ void menu() {
     }
 }
 
-int main(void) {
-    menu();
+int main(int argc, char * argv[]) {
+    if (argc > 1) {
+        if (strcmp(argv[1], "--help") == 0 || strcmp(argv[1], "-h") == 0) {
+            printf("StealthHunter [options]\nOptions:\n --help or -h\n --version or -v");
+        } else if (strcmp(argv[1], "--version") == 0 || strcmp(argv[1], "-v") == 0) {
+            printf("StealthHunter version %s\n", VERSION_SH);
+        } else {
+            menu();
+        }
+    } else {
+        menu();
+    }
 
     return 0;
 }

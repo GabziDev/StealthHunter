@@ -1,7 +1,6 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-extern const char* VERSION_SH;
 extern const char* RESET;
 extern const char* RED;
 extern const char* GREEN;

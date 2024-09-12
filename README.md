@@ -14,15 +14,13 @@ StealthHunter est un logiciel de test de sécurité conçu pour détecter les vu
 #### Debian/Ubuntu (APT)
 ```bash
 sudo apt update
-sudo apt install curl
-sudo apt install cmake 
+sudo apt install build-essential cmake curl git libcurl4-openssl-dev
 ```
 
 #### Arch Linux (Pacman)
 ```bash
 sudo pacman -Syu
-sudo pacman -S curl
-sudo pacman -S cmake
+sudo pacman -S base-devel cmake curl git libcurl-compat
 ```
 
 ### Build
@@ -33,15 +31,11 @@ mkdir build
 cd build
 cmake ..
 make
+make install
 ```
 
-(Windows)
+## Execution
 ```bash
-git clone https://github.com/GabziDev/StealthHunter.git
-cd StealthHunter
-mkdir build
-cd build
-cmake -DCURL_INCLUDE_DIR="C:\path\to\curl\include" -DCURL_LIBRARY="C:\path\to\curl\build\lib\libcurl.dll.a" ..
-cmake --build . --config Release
+StealthHunter
 ```
 

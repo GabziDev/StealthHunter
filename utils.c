@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-const char* VERSION_SH = "v1.0.0-beta";
-
 const char* RESET = "\033[0m";
 
 const char* RED = "\033[31m";

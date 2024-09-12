@@ -16,6 +16,7 @@ add_executable(StealthHunter main.c
         utils.c
         dirbusting.c
         dirbusting.h
+        version.h
 )
 
 install(TARGETS StealthHunter DESTINATION /usr/local/bin)
