@@ -17,11 +17,21 @@ void dirbusting_start(const char *url) {
     CURLcode res;
     long http_code = 0;
 
-    FILE* file = fopen("wordlist/dirbusting.wlsh", "r");
+    char* fileDir = "wordlist/dirbusting.wlsh";
+
+    FILE* file = fopen(fileDir, "r");
     if (file == NULL) {
         printf("%s Empty file or not exist.", ALERT);
         return;
     }
+
+    printf("<============>\n");
+    printf("%s Url : %s\n", INFO, url);
+    printf("%s World list : %s\n", INFO, fileDir);
+    printf("<============>\n");
+
+    printf("%s Press a key to start.\n\n", WARNING);
+    getchar();
 
     char line[2048];
 
