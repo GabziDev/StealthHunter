@@ -22,7 +22,7 @@ void menu() {
         printf("1: XSS %s(Not Available)%s\n", RED, RESET);
         printf("2: Injection NoSQL %s(Not Available)%s\n", RED, RESET);
         printf("3: Injection SQL %s(Not Available)%s\n", RED, RESET);
-        printf("4: Dir Busting\n");
+        printf("4: Dir Busting %s(Available)%s\n", GREEN, RESET);
         printf("%sq%s: quit\n", RED, RESET);
         printf("-> ");
 

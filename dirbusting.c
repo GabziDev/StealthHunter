@@ -17,15 +17,21 @@ void dirbusting_start(const char *url) {
     CURLcode res;
     long http_code = 0;
 
-    const char *dirList[] = {"/admin", "/dashboard", "/.env", "/robots.txt", "/old", NULL};
-    const char **dir = dirList;
+    FILE* file = fopen("wordlist/dirbusting.wlsh", "r");
+    if (file == NULL) {
+        printf("%s Empty file or not exist.", ALERT);
+        return;
+    }
+
+    char line[2048];
 
     curl = curl_easy_init();
     if (curl) {
-        while (*dir != NULL) {
-            char full_url[2048];
+        while (fgets(line, sizeof(line), file) != NULL) {
+            line[strcspn(line, "\n")] = 0;
 
-            snprintf(full_url, sizeof(full_url), "%s%s", url, *dir);
+            char full_url[2048];
+            snprintf(full_url, sizeof(full_url), "%s%s", url, line);
 
             curl_easy_setopt(curl, CURLOPT_URL, full_url);
             curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
@@ -40,14 +46,15 @@ void dirbusting_start(const char *url) {
                 printf("%s (%ld) %s \n", ALERT, http_code, full_url);
             }
 
-            dir++;
-            sleep(1);
+            //sleep(1);
         }
 
         curl_easy_cleanup(curl);
     } else {
         printf("\n%s cURL initialization error...\n", ALERT);
     }
+
+    fclose(file);
 
     printf("\n%s Press a key to exit...\n", INFO);
     getchar();
@@ -63,7 +70,7 @@ void dirbusting_prompts() {
         printf("%s==> You selected option 4 (Dir Busting)\n", YELLOW);
         printf("%s Press 'q' to exit\n", INFO);
 
-        printf("\nWebsite URL : ");
+        printf("\nWebsite URL [ http(s)://domain.com/ ] : ");
 
         if (fgets(inputUser, sizeof(inputUser), stdin) != NULL) {
             inputUser[strcspn(inputUser, "\n")] = 0;
