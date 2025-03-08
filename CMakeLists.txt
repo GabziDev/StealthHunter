@@ -7,6 +7,7 @@ find_package(CURL REQUIRED)
 
 add_executable(StealthHunter main.c
         utils.h
+        colors.h
         check_xss.c
         check_xss.h
         check_sql_injection.c
@@ -17,6 +18,7 @@ add_executable(StealthHunter main.c
         dirbusting.c
         dirbusting.h
         version.h
+        colors.c
 )
 
 install(TARGETS StealthHunter DESTINATION /usr/local/bin)

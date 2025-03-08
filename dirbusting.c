@@ -6,9 +6,8 @@
 #include <curl/curl.h>
 #include <unistd.h>
 
+#include "colors.h"
 #include "utils.h"
-
-#define FILE_DIR "wordlist/dirbusting.wlsh"
 
 // Callback data reçues par cURL
 size_t write_callback(void *contents, size_t size, size_t nmemb, void *userp) {
@@ -16,24 +15,26 @@ size_t write_callback(void *contents, size_t size, size_t nmemb, void *userp) {
 }
 
 // Lnace le processus de dirbusting en parcourant le fichier wordlist
-void dirbusting_start(const char *url) {
+void dirbusting_start(const char *url, const char *path, int sleepDelay) {
     CURL *curl;
     CURLcode res;
     long http_code = 0;
 
-    FILE* file = fopen(FILE_DIR, "r");
+    FILE* file = fopen(path, "r");
+
+    print_logo();
 
     if (file == NULL) {
         printf("%s Empty file or not exist.", ALERT);
         return;
     }
 
-    printf("<============>\n");
+    printf("\n<============>\n");
     printf("%s Url : %s\n", INFO, url);
-    printf("%s World list : %s\n", INFO, FILE_DIR);
+    printf("%s World list : %s\n", INFO, path);
     printf("<============>\n");
 
-    printf("%s Press a key to start.\n\n", WARNING);
+    printf("\n%s Press a key to start.\n\n", WARNING);
     getchar();
 
     char line[2048];
@@ -59,7 +60,9 @@ void dirbusting_start(const char *url) {
                 printf("%s (%ld) %s \n", ALERT, http_code, full_url);
             }
 
-            //sleep(1);
+            if (sleepDelay > 0) {
+                sleep_ms(sleepDelay);
+            }
         }
 
         curl_easy_cleanup(curl);
@@ -73,33 +76,40 @@ void dirbusting_start(const char *url) {
     getchar();
 }
 
+void dirbusting_valide_option(const char* inputUrl, const char* inputWordlist, int sleepDelay) {
+    if (!is_valid_url(inputUrl)) {    // Verifier Input URL
+        printf("%s Error: Invalid URL. Please use http:// or https://.\n", ALERT);
+    } else if (!is_valid_file(inputWordlist)) {    // Verifier Input Worldlist
+        printf("%s Error: Wordlist file does not exist.\n", ALERT);
+    } else {
+        // lancer le processus
+        clear_console();
+        dirbusting_start(inputUrl, inputWordlist, sleepDelay);
+    }
+}
+
 // Prompt pour démarrer un dirbusting
 void dirbusting_prompts() {
-    bool promptIsActive = true;
-    char inputUser[MAX_INPUT_SIZE];
+    char inputUrl[MAX_INPUT_SIZE];
+    char inputWordlist[MAX_INPUT_SIZE];
+    int inputDelay = 0;
 
-    while (promptIsActive) {
-        print_logo();
+    print_logo();
 
-        printf("%s==> You selected option 4 (Dir Busting)\n", YELLOW);
-        printf("%s Press 'q' to exit\n", INFO);
+    printf("%s==> You selected option 4 (Dir Busting)\n", YELLOW);
+    printf("%s Press 'q' to exit\n", INFO);
 
-        printf("\nWebsite URL [ http(s)://domain.com/ ] : ");
+    // Input URL
+    printf("\nWebsite URL [ http(s)://domain.com/ ] :");
+    scanf("%s", inputUrl);
 
-        if (fgets(inputUser, MAX_INPUT_SIZE, stdin) != NULL) {
-            inputUser[strcspn(inputUser, "\n")] = 0;
+    // Input Wordlist
+    printf("Wordlist Path [ /path/to/wordlist.txt ] : ");
+    scanf("%s", inputWordlist);
 
-            if (strcmp(inputUser, "q") == 0) {
-                clear_console();
-                promptIsActive = false;
-            } else if (strncmp(inputUser, "https://", 7) == 0 || strncmp(inputUser, "http://", 7) == 0) {
-                promptIsActive = false;
-                dirbusting_start(inputUser);
-            } else {
-                clear_console();
-            }
-        } else {
-            clear_console();
-        }
-    }
+    // Input Delay
+    printf("Delay [ milliseconds ] : ");
+    scanf("%d", &inputDelay);
+
+    dirbusting_valide_option(inputUrl, inputWordlist, inputDelay);
 }

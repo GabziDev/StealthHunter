@@ -1,7 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
 
 #include "utils.h"
+
+#include <unistd.h>
 
 // Clear la console selon le systeme d'exploitation
 void clear_console() {
@@ -12,19 +16,21 @@ void clear_console() {
 #endif
 }
 
-// Logo
-void print_logo() {
-    printf("\n%s         ______   ____   ____  ____   ____  _____   ______   _________________      ______        _____   \n", GREEN);
-    printf("     ___|\\     \\ |    | |    ||    | |    ||\\    \\ |\\     \\ /                 \\ ___|\\     \\   ___|\\    \\  \n");
-    printf("    |    |\\     \\|    | |    ||    | |    | \\ \\    \\| \\     \\\\______     ______/|     \\     \\ |    |\\    \\ \n");
-    printf("    |    |/____/||    |_|    ||    | |    |  \\|    \\  \\     |  %s\\(%s /    /  %s)/%s   |     ,_____/||    | |    | \n", YELLOW, GREEN, YELLOW, GREEN);
-    printf(" ___|    \\|   | ||    .-.    ||    | |    |   |     \\  |    |   %s'%s |   |   %s'%s    |     \\--'\\_|/|    |/____/ \n", YELLOW, GREEN, YELLOW, GREEN);
-    printf("|    \\    \\___|/ |    | |    ||    | |    |   |      \\ |    |     |   |        |     /___/|  |    |\\    \\ \n");
-    printf("|    |\\     \\    |    | |    ||    | |    |   |    |\\ \\|    |    /   //        |     \\____|\\ |    | |    | \n");
-    printf("|\\ ___\\|_____|   |____| |____||\\___\\_|____|   |____||\\_____/|   /___//         |____ '     /||____| |____| \n");
-    printf("| |    |     |   |    | |    || |    |    |   |    |/ \\|   ||  |`   |          |    /_____/ ||    | |    | \n");
-    printf(" \\|____|_____|   |____| |____| \\|____|____|   |____|   |___|/  |____|          |____|     | /|____| |____| \n");
-    printf("%s    \\(    )/       \\(     )/      \\(   )/       \\(       )/      \\(              \\( %s|_____|/%s   \\(     )/  \n", YELLOW, GREEN, YELLOW);
-    printf("     '    '         '     '        '   '         '       '        '               '    )/       '     '   \n");
-    printf("                                                                                       '                   \n%s", RESET);
+// Fonction pour mettre en pause avec des ms
+void sleep_ms(int milliseconds) {
+#ifdef _WIN32
+    Sleep(milliseconds);
+#else
+    usleep(milliseconds * 1000);
+#endif
+}
+
+// valider une url http
+bool is_valid_url(const char *url) {
+    return strncmp(url, "http://", 7) == 0 || strncmp(url, "https://", 8) == 0;
+}
+
+// valider un fichier si il existe sur le system
+bool is_valid_file(const char *filePath) {
+    return access(filePath, F_OK) != -1;
 }

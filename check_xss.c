@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 
+#include "colors.h"
 #include "utils.h"
 
 void check_xss() {
