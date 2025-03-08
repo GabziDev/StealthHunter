@@ -8,18 +8,21 @@
 
 #include "utils.h"
 
+#define FILE_DIR "wordlist/dirbusting.wlsh"
+
+// Callback data reçues par cURL
 size_t write_callback(void *contents, size_t size, size_t nmemb, void *userp) {
     return size * nmemb;
 }
 
+// Lnace le processus de dirbusting en parcourant le fichier wordlist
 void dirbusting_start(const char *url) {
     CURL *curl;
     CURLcode res;
     long http_code = 0;
 
-    char* fileDir = "wordlist/dirbusting.wlsh";
+    FILE* file = fopen(FILE_DIR, "r");
 
-    FILE* file = fopen(fileDir, "r");
     if (file == NULL) {
         printf("%s Empty file or not exist.", ALERT);
         return;
@@ -27,7 +30,7 @@ void dirbusting_start(const char *url) {
 
     printf("<============>\n");
     printf("%s Url : %s\n", INFO, url);
-    printf("%s World list : %s\n", INFO, fileDir);
+    printf("%s World list : %s\n", INFO, FILE_DIR);
     printf("<============>\n");
 
     printf("%s Press a key to start.\n\n", WARNING);
@@ -41,14 +44,14 @@ void dirbusting_start(const char *url) {
             line[strcspn(line, "\n")] = 0;
 
             char full_url[2048];
-            snprintf(full_url, sizeof(full_url), "%s%s", url, line);
+            snprintf(full_url, sizeof(full_url), "%s%s", url, line); // concatenation de l'url avec un mot de la wordlist
 
             curl_easy_setopt(curl, CURLOPT_URL, full_url);
             curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
             curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_callback);
 
-            res = curl_easy_perform(curl);
-            curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);
+            res = curl_easy_perform(curl); // exec la requete web
+            curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code); // recuperer les infos de la réponse
 
             if (res == CURLE_OK) {
                 printf("%s (%ld) %s \n", OK, http_code, full_url);
@@ -70,11 +73,12 @@ void dirbusting_start(const char *url) {
     getchar();
 }
 
+// Prompt pour démarrer un dirbusting
 void dirbusting_prompts() {
-    bool menuIsActive = true;
-    char inputUser[100];
+    bool promptIsActive = true;
+    char inputUser[MAX_INPUT_SIZE];
 
-    while (menuIsActive) {
+    while (promptIsActive) {
         print_logo();
 
         printf("%s==> You selected option 4 (Dir Busting)\n", YELLOW);
@@ -82,14 +86,14 @@ void dirbusting_prompts() {
 
         printf("\nWebsite URL [ http(s)://domain.com/ ] : ");
 
-        if (fgets(inputUser, sizeof(inputUser), stdin) != NULL) {
+        if (fgets(inputUser, MAX_INPUT_SIZE, stdin) != NULL) {
             inputUser[strcspn(inputUser, "\n")] = 0;
 
             if (strcmp(inputUser, "q") == 0) {
                 clear_console();
-                menuIsActive = false;
+                promptIsActive = false;
             } else if (strncmp(inputUser, "https://", 7) == 0 || strncmp(inputUser, "http://", 7) == 0) {
-                menuIsActive = false;
+                promptIsActive = false;
                 dirbusting_start(inputUser);
             } else {
                 clear_console();
@@ -98,8 +102,4 @@ void dirbusting_prompts() {
             clear_console();
         }
     }
-}
-
-void dirbusting_main() {
-    dirbusting_prompts();
 }

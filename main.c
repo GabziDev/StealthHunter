@@ -13,7 +13,7 @@
 void menu() {
     char *curl_version();
     bool menuIsActive = true;
-    char inputUser[100];
+    char inputUser[MAX_INPUT_SIZE];
 
     while (menuIsActive) {
         clear_console();
@@ -27,7 +27,7 @@ void menu() {
         printf("%sq%s: quit\n", RED, RESET);
         printf("-> ");
 
-        if (fgets(inputUser, sizeof(inputUser), stdin) != NULL) {
+        if (fgets(inputUser, MAX_INPUT_SIZE, stdin) != NULL) {
             inputUser[strcspn(inputUser, "\n")] = 0;
 
             clear_console();
@@ -41,7 +41,7 @@ void menu() {
             } else if (strcmp(inputUser, "3") == 0) {
                 check_sql_injection();
             } else if (strcmp(inputUser, "4") == 0) {
-                dirbusting_main();
+                dirbusting_prompts();
             } else {
                 clear_console();
             }
