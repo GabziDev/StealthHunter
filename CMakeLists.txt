@@ -5,20 +5,20 @@ set(CMAKE_C_STANDARD 11)
 
 find_package(CURL REQUIRED)
 
-add_executable(StealthHunter main.c
-        utils.h
-        colors.h
-        check_xss.c
-        check_xss.h
-        check_sql_injection.c
-        check_sql_injection.h
-        check_nosql_injection.c
-        check_nosql_injection.h
-        utils.c
-        dirbusting.c
-        dirbusting.h
-        version.h
-        colors.c
+add_executable(StealthHunter src/main.c
+        src/include/utils.h
+        src/include/colors.h
+        src/check_xss.c
+        src/include/check_xss.h
+        src/check_sql_injection.c
+        src/include/check_sql_injection.h
+        src/check_nosql_injection.c
+        src/include/check_nosql_injection.h
+        src/utils.c
+        src/dirbusting.c
+        src/include/dirbusting.h
+        src/include/version.h
+        src/colors.c
 )
 
 install(TARGETS StealthHunter DESTINATION /usr/local/bin)
