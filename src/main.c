@@ -4,13 +4,13 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "check_nosql_injection.h"
-#include "check_sql_injection.h"
-#include "check_xss.h"
-#include "dirbusting.h"
-#include "colors.h"
-#include "utils.h"
-#include "version.h"
+#include "include/check_nosql_injection.h"
+#include "include/check_sql_injection.h"
+#include "include/check_xss.h"
+#include "include/dirbusting.h"
+#include "include/colors.h"
+#include "include/utils.h"
+#include "include/version.h"
 
 void menu() {
     char *curl_version();

@@ -1,9 +1,8 @@
-#include "check_xss.h"
-
 #include <stdio.h>
 
-#include "colors.h"
-#include "utils.h"
+#include "include/check_xss.h"
+#include "include/colors.h"
+#include "include/utils.h"
 
 void check_xss() {
     printf("%s You selected option 1 (Check XSS)\n", INFO);
