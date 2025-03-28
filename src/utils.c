@@ -2,10 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-
-#include "utils.h"
-
 #include <unistd.h>
+
+#include "include/utils.h"
 
 // Clear la console selon le systeme d'exploitation
 void clear_console() {

@@ -1,4 +1,4 @@
-#include "colors.h"
+#include "include/colors.h"
 
 void print_logo() {
     printf("\n%s         ______   ____   ____  ____   ____  _____   ______   _________________      ______        _____   \n", GREEN);

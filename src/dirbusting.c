@@ -1,13 +1,12 @@
-#include "dirbusting.h"
-
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
 #include <curl/curl.h>
 #include <unistd.h>
 
-#include "colors.h"
-#include "utils.h"
+#include "include/dirbusting.h"
+#include "include/colors.h"
+#include "include/utils.h"
 
 // Callback data reçues par cURL
 size_t write_callback(void *contents, size_t size, size_t nmemb, void *userp) {
