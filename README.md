@@ -1,4 +1,4 @@
-# StealthHunter | Chasseur Furtif
+# StealthHunter
 
 StealthHunter est un logiciel de test de sécurité conçu pour détecter les vulnérabilités dans les sites web, y compris les injections SQL, NoSQL, et XSS. Il offre également d'autres fonctionnalités !
 
