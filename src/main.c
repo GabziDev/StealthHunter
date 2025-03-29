@@ -12,6 +12,19 @@
 #include "include/utils.h"
 #include "include/version.h"
 
+typedef struct {
+    char *title;
+    void (*init)(void);
+    bool available;
+} Module;
+
+static const Module modules[4] = {
+        { .title = "XSS", .init = check_xss, .available = false },
+        { .title = "Injection NoSQL", .init = check_nosql_injection, .available = false },
+        { .title = "Injection SQL", .init = check_sql_injection, .available = false },
+        { .title = "Dir Busting", .init = dirbusting_prompts, .available = true }
+};
+
 void menu() {
     char *curl_version();
     bool menuIsActive = true;
@@ -22,30 +35,31 @@ void menu() {
 
         print_logo();
         printf("%s Welcome to the StealthHunter Menu ! [D/Gabzdev] (S-H/%s)\n%s [%s]\n", INFO, VERSION_SH, OK, curl_version());
-        printf("1: XSS %s(Not Available)%s\n", RED, RESET);
-        printf("2: Injection NoSQL %s(Not Available)%s\n", RED, RESET);
-        printf("3: Injection SQL %s(Not Available)%s\n", RED, RESET);
-        printf("4: Dir Busting %s(Available)%s\n", GREEN, RESET);
+        size_t modulesSize = sizeof(modules) / sizeof(modules[0]);
+        for (int i = 0; i < modulesSize; i++) {
+            if (!modules[i].available) {
+                printf("%d: %s %s(Not Available)%s\n", i+1, modules[i].title, RED, RESET);
+            } else {
+                printf("%d: %s %s(Available)%s\n", i+1, modules[i].title, GREEN, RESET);
+            }
+        }
+
         printf("%sq%s: quit\n", RED, RESET);
         printf("-> ");
 
         if (fgets(inputUser, MAX_INPUT_SIZE, stdin) != NULL) {
             inputUser[strcspn(inputUser, "\n")] = 0;
 
-            if (strcmp(inputUser, "q") == 0) {
+            int option = atoi(inputUser);
+            if (option >= 1 && option <= sizeof(modules) / sizeof(modules[0])) {
+                if (modules[option - 1].available) {
+                    clear_console();
+                    modules[option - 1].init();
+                } else {
+                    clear_console();
+                }
+            } else if (inputUser[0] == 'q') {
                 menuIsActive = false;
-            } else if (strcmp(inputUser, "1") == 0) {
-                clear_console();
-                check_xss();
-            } else if (strcmp(inputUser, "2") == 0) {
-                clear_console();
-                check_nosql_injection();
-            } else if (strcmp(inputUser, "3") == 0) {
-                clear_console();
-                check_sql_injection();
-            } else if (strcmp(inputUser, "4") == 0) {
-                clear_console();
-                dirbusting_prompts();
             } else {
                 clear_console();
             }

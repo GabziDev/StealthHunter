@@ -95,8 +95,7 @@ void dirbusting_prompts() {
 
     print_logo();
 
-    printf("%s==> You selected option 4 (Dir Busting)\n", YELLOW);
-    printf("%s Press 'q' to exit\n", INFO);
+    printf("%s==> You selected option 4 (Dir Busting)%s\n", YELLOW, RESET);
 
     // Input URL
     printf("\nWebsite URL [ http(s)://domain.com/ ] :");
