@@ -71,9 +71,9 @@ void menu() {
 
 void helpMessages() {
     const char *helpMessage[] = {
-        " --help or -h                                              Print this help message",
-        " --version or -v                                           Print version information",
-        " --dirbusting --url <url> --wordlist <path> <delay ms>     Start dirbusting with custom wordlist",
+            " --help or -h                                              Print this help message",
+            " --version or -v                                           Print version information",
+            " --dirbusting --url <url> --wordlist <path> <delay ms>     Start dirbusting with custom wordlist",
     };
 
     size_t helpMessageSize = sizeof(helpMessage) / sizeof(helpMessage[0]);
